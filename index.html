@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="style.css">
+  <script src="calculator.js" defer></script>
 </head>
 <body>
   <div id="forCentering">
   <div id="calculator">
     
     <div id="display">
+      <p id="total-answer"></p>
       <p id="answer">display</p>
     </div>
 
@@ -24,25 +26,25 @@
       <div id="container">
 
         <div class="number-buttons">
-          <button id="9">9</button>
-          <button id="8">8</button>
-          <button id="7">7</button>
-          <button id="6">6</button>
-          <button id="5">5</button>
-          <button id="4">4</button>
-          <button id="3">3</button>
-          <button id="2">2</button>
-          <button id="1">1</button>
-          <button id="=">=</button>
-          <button id="0">0</button>
-          <button id=".">.</button>
+          <button id="num-9">9</button>
+          <button id="num-8">8</button>
+          <button id="num-7">7</button>
+          <button id="num-6">6</button>
+          <button id="num-5">5</button>
+          <button id="num-4">4</button>
+          <button id="num-3">3</button>
+          <button id="num-2">2</button>
+          <button id="num-1">1</button>
+          <button id="op-eq">=</button>
+          <button id="num-0">0</button>
+          <button id="decimal">.</button>
         </div>
 
         <div class="operation-buttons">
-          <button id="+">+</button>
-          <button id="-">-</button>
-          <button id="*">*</button>
-          <button id="/">/</button>
+          <button id="op-add">+</button>
+          <button id="op-sub">-</button>
+          <button id="op-mul">*</button>
+          <button id="op-div">/</button>
           <button id="exponent">x<sup>y</sup></button>
           <button id="root"><sup>y</sup>&Sqrt;x </button>
         </div>

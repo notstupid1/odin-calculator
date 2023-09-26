@@ -31,12 +31,19 @@
 }
 #answer {
 	align-self: flex-end;
-	font-size: 32px;
+	min-width: 30px;
+	min-height: 32px;
+	font-size: 28px;
+	color: hsl(240, 2%, 48%);
+}
+#total-answer {
+	align-self: flex-start;
+	margin-left: 4px;
 	color: hsl(240, 2%, 48%);
 }
 .buttons {
 	margin-top: 10px;
-  width: 270px;
+    width: 270px;
 	margin-bottom: 10px;
 	display: flex;
 	flex-direction: column;
