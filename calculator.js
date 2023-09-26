@@ -12,7 +12,7 @@ const btn_num_9 = document.querySelector('#num-9');
 const btn_num_equal = document.querySelector('#op-eq');
 const btn_num_decimal = document.querySelector('#decimal');
 
-const btn_deconste = document.querySelector('#deconste');
+const btn_delete = document.querySelector('#delete');
 const btn_clear = document.querySelector('#clear');
 
 const btn_num_add = document.querySelector('#op-add');
@@ -37,25 +37,30 @@ btn_num_7.addEventListener('click', () => {buildNumber(7)});
 btn_num_8.addEventListener('click', () => {buildNumber(8)});
 btn_num_9.addEventListener('click', () => {buildNumber(9)});
 btn_num_decimal.addEventListener('click', () => {buildNumber('decimal')});
+btn_num_equal.addEventListener('click', () => {solve()});
 
 btn_num_add.addEventListener('click', () => {performAddition()});
 btn_num_sub.addEventListener('click', () => {performSubraction()});
 btn_num_mul.addEventListener('click', () => {performMultiplication()});
 btn_num_div.addEventListener('click', () => {performDivision()});
+btn_num_exponent.addEventListener('click', () => {performExponentiation()});
+btn_num_root.addEventListener('click', () => {performRoot()});
 
 btn_clear.addEventListener('click', () => clear());
+btn_delete.addEventListener('click', () => numDelete());
 
 let built_number = 0;
 let number_string = '';
 let isDecimal = false;
 
 function buildNumber(num) {
+    if(number_string === '0') number_string = '';
     if (num === 'decimal') {
         if(number_string.length == 0) number_string += '0.';
         else number_string += '.';
 
         isDecimal = true;
-        btn_num_decimal.removeEventListener;
+        btn_num_decimal.disabled = true;
     }
     else {
         number_string += num;
@@ -71,22 +76,142 @@ function parseNumber() {
     }
 }
 
-let TotalResult = 0;
+let TotalResult = -1;
+let activeOperation = null;
 function performAddition() {
+    btn_num_decimal.disabled = false;
+    if(activeOperation === '=') {
+        activeOperation = '+';
+        return;
+    }
     parseNumber();
-    TotalResult += built_number;
-    number_string = '';
-    displayNumber('');
+    activeOperation = '+';
+    if(TotalResult === -1) TotalResult = built_number;
+    else TotalResult += built_number;
+    number_string = '0';
+    displayNumber('0');
+    displayTotal('Ans: ' + TotalResult);
+}
+function performSubraction() {
+    btn_num_decimal.disabled = false;
+    if(activeOperation === '=') {
+        activeOperation = '-';
+        return;
+    }
+    parseNumber();
+    activeOperation = '-';
+    if(TotalResult === -1) TotalResult = built_number;
+    else TotalResult -= built_number;
+    number_string = '0';
+    displayNumber('0');
+    displayTotal('Ans: ' + TotalResult);
+}
+function performMultiplication() {
+    btn_num_decimal.disabled = false;
+    if(activeOperation === '=') {
+        activeOperation = '*';
+        return;
+    }
+    parseNumber();
+    activeOperation = '*';
+    if(TotalResult === -1) TotalResult = built_number;
+    else TotalResult *= built_number;
+    number_string = '0';
+    displayNumber('0');
+    displayTotal('Ans: ' + TotalResult);
+}
+function performDivision() {
+    btn_num_decimal.disabled = false;
+    if(activeOperation === '=') {
+        activeOperation = '/';
+        return;
+    }
+    parseNumber();
+    activeOperation = '/';
+    if(TotalResult === -1) TotalResult = built_number;
+    else TotalResult /= built_number;
+    number_string = '0';
+    displayNumber('0');
+    displayTotal('Ans: ' + TotalResult);
+}
+function performExponentiation() {
+    btn_num_decimal.disabled = false;
+    if(activeOperation === '=') {
+        activeOperation = 'exp';
+        return;
+    }
+    parseNumber();
+    activeOperation = 'exp';
+    if(TotalResult === -1) TotalResult = built_number;
+    else TotalResult **= built_number;
+    number_string = '0';
+    displayNumber('0');
+    displayTotal('Ans: ' + TotalResult);
+}
+function performRoot() {
+    btn_num_decimal.disabled = false;
+    if(activeOperation === '=') {
+        activeOperation = 'root';
+        return;
+    }
+    parseNumber();
+    activeOperation = 'root';
+    if(TotalResult === -1) TotalResult = built_number;
+    else TotalResult **= (1/built_number);
+    number_string = '0';
+    displayNumber('0');
+    displayTotal('Ans: ' + TotalResult);
+}
+function solve(){
+    switch(activeOperation) {
+        case '+':
+            parseNumber();
+            activeOperation = '=';
+            TotalResult += built_number;
+            break;
+        case '-':
+            parseNumber();
+            activeOperation = '=';
+            TotalResult -= built_number;
+            break;
+        case '*':
+            parseNumber();
+            activeOperation = '=';
+            TotalResult *= built_number;
+            break;
+        case '/':
+            parseNumber();
+            activeOperation = '=';
+            TotalResult /= built_number;
+            break;
+        case 'exp':
+            parseNumber();
+            activeOperation = '=';
+            TotalResult **= built_number;
+            break;
+        case 'root':
+            parseNumber();
+            activeOperation = '=';
+            TotalResult **= (1/built_number);
+            break;    
+    }
+    number_string = '0';
+    displayNumber(TotalResult);
     displayTotal('Ans: ' + TotalResult);
 }
 
 function clear() {
-    TotalResult = 0;
-    number_string = '';
+    TotalResult = -1;
+    number_string = '0';
     built_number = 0;
     let isDecimal = false;
-    displayNumber('');
+    displayNumber('0');
     displayTotal('');
+}
+function numDelete() {
+    number_string = number_string.substring(0, number_string.length - 1);
+    if(number_string.length === 0) number_string = '0';
+    displayNumber(number_string);
 }
 
 function displayNumber(string) {

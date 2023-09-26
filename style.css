@@ -34,6 +34,8 @@
 	min-width: 30px;
 	min-height: 32px;
 	font-size: 28px;
+	margin-right: 10px;
+	text-align: right;
 	color: hsl(240, 2%, 48%);
 }
 #total-answer {
