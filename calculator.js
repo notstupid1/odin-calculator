@@ -205,6 +205,7 @@ function clear() {
     number_string = '0';
     built_number = 0;
     let isDecimal = false;
+    btn_num_decimal.disabled = false;
     displayNumber('0');
     displayTotal('');
 }
@@ -212,6 +213,71 @@ function numDelete() {
     number_string = number_string.substring(0, number_string.length - 1);
     if(number_string.length === 0) number_string = '0';
     displayNumber(number_string);
+}
+
+document.addEventListener('keydown', keyBoardSupport);
+function keyBoardSupport(e) {
+    let key = e.key;
+    e.preventDefault();
+    console.log(key);
+    switch(key) {
+        case '0': 
+            buildNumber(0);
+            break;
+        case '1': 
+            buildNumber(1);
+            break;
+        case '2': 
+            buildNumber(2);
+            break;
+        case '3': 
+            buildNumber(3);
+            break;
+        case '4': 
+            buildNumber(4);
+            break;
+        case '5': 
+            buildNumber(5);
+            break;
+        case '6': 
+            buildNumber(6);
+            break;
+        case '7': 
+            buildNumber(7);
+            break;
+        case '8': 
+            buildNumber(8);
+            break;
+        case '9': 
+            buildNumber(9);
+            break;
+        case '.':
+            buildNumber('decimal');
+            break;
+        case 'Delete':
+        case 'Backspace':
+            numDelete();
+            break;
+        case 'Escape':
+            clear();
+            break;
+        case '+':
+            performAddition();
+            break;
+        case '-':
+            performSubraction();
+            break;
+        case '*':
+            performMultiplication();
+            break;
+        case '/':
+            performDivision();
+            break;
+        case '=':
+        case 'Enter':
+            solve();
+            break;
+    }
 }
 
 function displayNumber(string) {
